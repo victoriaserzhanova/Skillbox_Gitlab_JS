@@ -33,12 +33,12 @@ function getDiscount(code, totalSum, countGoods) {
     result = (result - maxSum) * condition[2] + maxSum;
   }
 
-  if (code === promo[1]) {
-    if (result >= 20000) {
-      result = result * condition[1];
-    }
+  if (code === promo[1] && result >= 20000) {
+    result = result * condition[1];
   }
   return result;
 }
 
-console.log(getPrice(80000, 35, promo[0]));
+// console.log(getPrice(80000, 35, promo[0]));
+
+export default {getPrice};
