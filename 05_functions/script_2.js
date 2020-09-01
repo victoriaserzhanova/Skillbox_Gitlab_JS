@@ -41,4 +41,5 @@ function getDiscount(code, totalSum, countGoods) {
 
 // console.log(getPrice(80000, 35, promo[0]));
 
+
 export default {getPrice};
