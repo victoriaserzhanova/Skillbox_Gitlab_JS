@@ -7,11 +7,11 @@ let objects = [
     { name: 'Пётр', surname: 'Петров' }
 ]
 
-function findValueByPropertyName (objects, propertyName, propertyValue) {
-    let result = objects.find(item => item[propertyName] == propertyValue );
-    console.log(result);
+function filterAllItemsByPropertyName(objects, propertyName, propertyValue) {
+	let results = objects.filter(item => item[propertyName] == propertyValue );
+	console.log(results);
 }
 
-findValueByPropertyName(objects,'surname','Иванов');
+filterAllItemsByPropertyName(objects,'surname','Иванов');
 
-export default {findValueByPropertyName};
+// export default {filterAllItemsByPropertyName};
