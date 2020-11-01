@@ -27,7 +27,7 @@ function createDropdownList(array, valueDefault) {
 	return dropdownList;
 }
 
-let valueOfSelectedItem = 'value_2';
-let dropdownList = createDropdownList(valuesForDropdownList, valueOfSelectedItem);
+let valueDefault = 'value_2';
+let dropdownList = createDropdownList(valuesForDropdownList, valueDefault);
 
 
