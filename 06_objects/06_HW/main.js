@@ -6,19 +6,28 @@ let valuesForDropdownList =[
 ]
 
 
-function createDropdownList(array, value,label) {
+function createDropdownList(array, valueDefault) {
 	let dropdownList = document.createElement('select');
 
-	for (let key in array) {
+	array.forEach((item, index) => {
 		let dropdownListItem = document.createElement('option');
-		
-		dropdownListItem.value = array[key][value];
-		dropdownListItem.textContent = array[key][label];
+
+		dropdownListItem.value = item['value'];
+		dropdownListItem.textContent = item['label'];
 		dropdownList.append(dropdownListItem);
-	}
+
+		if (index == 0) {
+			dropdownListItem.setAttribute('selected', true);
+		}
+
+		if (dropdownListItem.value == valueDefault) {
+			dropdownListItem.setAttribute('selected', true);
+		}
+	});
 	return dropdownList;
 }
 
-let dropdownList = createDropdownList(valuesForDropdownList,'value', 'label');
+let valueOfSelectedItem = 'value_2';
+let dropdownList = createDropdownList(valuesForDropdownList, valueOfSelectedItem);
 
 
