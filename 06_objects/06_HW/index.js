@@ -1,3 +1,3 @@
-document.body.append(dropdownList);
-dropdownList.style.background = 'pink';
+document.body.append(dropdownListEl);
+dropdownListEl.style.background = 'pink';
 
