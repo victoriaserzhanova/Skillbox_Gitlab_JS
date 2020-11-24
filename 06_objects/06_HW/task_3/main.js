@@ -8,7 +8,8 @@ const attributesForOption =[
 
 // const dataForDropdownList = attributesForOption;
 const dataForDropdownList = createArrayOfObjects(numbers);
-const valueDefault = (dataForDropdownList[1]['value']).toString();
+const indexDefault = 2;
+const valueDefault = (dataForDropdownList[indexDefault]['value']).toString();
 
 
 function createElem(tagName, content, object) {
