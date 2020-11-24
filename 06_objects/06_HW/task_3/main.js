@@ -1,6 +1,6 @@
 'use strict';
 
-const numbers =[1, 2, 3, 4];
+const numbers =[1, 'two', 'three', 4];
 const attributesForOption =[
 	{ value: 'value_1', label: 'label_1'},
 	{ value: 'value_2', label: 'label_2'},
