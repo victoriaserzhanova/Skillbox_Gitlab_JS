@@ -1,16 +1,13 @@
 'use strict';
 
-const numbers =[1, 'two', 'three', 4];
-const attributesForOption =[
-	{ value: 'value_1', label: 'label_1'},
-	{ value: 'value_2', label: 'label_2'},
-]
-
-// const dataForDropdownList = attributesForOption;
-const dataForDropdownList = createArrayOfObjects(numbers);
-const indexDefault = 2;
-const valueDefault = (dataForDropdownList[indexDefault]['value']).toString();
-
+//different types of data for createDropdownListElem()
+const arrayExample =[1, 'two', 'three', 4];
+const objectExample = {
+	'2': 'str',
+	4: 'str1',
+	'str3': 24,
+	45: 34,
+};
 
 function createElem(tagName, content, object) {
 	const newEl = document.createElement(tagName);
@@ -21,7 +18,8 @@ function createElem(tagName, content, object) {
 	return newEl;
 }
 
-function createArrayOfObjects(array) {
+// adapt array of primitives to array of objects
+function createArrayAdapter(array) {
 	const arrayOfObjects = [];
 	for (let item of array) {
 		const newDataObject = {};
@@ -29,13 +27,37 @@ function createArrayOfObjects(array) {
 		newDataObject['label'] = item;
 		arrayOfObjects.push(newDataObject);
 	}
+	console.log(arrayOfObjects);
 	return arrayOfObjects;
 }
 
-function createDropdownListElem(array, valueDefault) {
+// adapt object of primitives to array of objects
+function createObjectAdapter(object) {
+	const arrayOfObjects = [];
+	for (let key in object) {
+		const newDataObject = {};
+		newDataObject['value'] = key;
+		newDataObject['label'] = object[key];
+		arrayOfObjects.push(newDataObject);
+	}
+	console.log(arrayOfObjects);
+	return arrayOfObjects;
+}
+
+function createDropdownListElem(data, indexDefault) {
 	const content = 'text content';
 	const dropdownListEl = createElem('select');
-	array.forEach((item) =>{
+	let attributesForOption;
+
+	if (Array.isArray(data)) {
+		attributesForOption = createArrayAdapter(data);
+	}
+	else {
+		attributesForOption = createObjectAdapter(data);
+	}
+
+	attributesForOption.forEach((item) => {
+		const valueDefault = (attributesForOption[indexDefault]['value']).toString();
 		const optionEl = createElem('option', content, item);
 
 		if (optionEl.value === valueDefault) {
@@ -46,7 +68,7 @@ function createDropdownListElem(array, valueDefault) {
 	return dropdownListEl;
 }
 
-const dropdownListEl = createDropdownListElem(dataForDropdownList, valueDefault);
+const dropdownListEl = createDropdownListElem(arrayExample, 1);
 
 
 
