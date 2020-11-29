@@ -19,7 +19,7 @@ function createElem(tagName, content, object) {
 }
 
 // adapt array of primitives to array of objects
-function createArrayAdapter(array) {
+function arrayAdapter(array) {
 	const arrayOfObjects = [];
 	for (let item of array) {
 		const newDataObject = {};
@@ -32,7 +32,7 @@ function createArrayAdapter(array) {
 }
 
 // adapt object of primitives to array of objects
-function createObjectAdapter(object) {
+function objectAdapter(object) {
 	const arrayOfObjects = [];
 	for (let key in object) {
 		const newDataObject = {};
@@ -50,10 +50,10 @@ function createDropdownListElem(data, indexDefault) {
 	let attributesForOption;
 
 	if (Array.isArray(data)) {
-		attributesForOption = createArrayAdapter(data);
+		attributesForOption = arrayAdapter(data);
 	}
 	else {
-		attributesForOption = createObjectAdapter(data);
+		attributesForOption = objectAdapter(data);
 	}
 
 	attributesForOption.forEach((item) => {
