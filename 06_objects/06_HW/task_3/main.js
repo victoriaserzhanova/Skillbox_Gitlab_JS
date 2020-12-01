@@ -9,6 +9,11 @@ const objectExample = {
 	45: 34,
 };
 
+const arrayOfObjectsExample =[
+	{ value: 'value_1', label: 'label_1'},
+	{ value: 'value_2', label: 'label_2'},
+]
+
 function createElem(tagName, content, object) {
 	const newEl = document.createElement(tagName);
 	newEl.textContent = content;
@@ -20,6 +25,9 @@ function createElem(tagName, content, object) {
 
 // adapt array of primitives to array of objects
 function arrayAdapter(array) {
+	if (typeof(array[0])==='object') {
+		return array;
+	}
 	const arrayOfObjects = [];
 	for (let item of array) {
 		const newDataObject = {};
@@ -27,7 +35,6 @@ function arrayAdapter(array) {
 		newDataObject['label'] = item;
 		arrayOfObjects.push(newDataObject);
 	}
-	console.log(arrayOfObjects);
 	return arrayOfObjects;
 }
 
@@ -40,11 +47,10 @@ function objectAdapter(object) {
 		newDataObject['label'] = object[key];
 		arrayOfObjects.push(newDataObject);
 	}
-	console.log(arrayOfObjects);
 	return arrayOfObjects;
 }
 
-function createDropdownListElem(data, indexDefault) {
+function createDropdownListElem(data, valueDefault) {
 	const content = 'text content';
 	const dropdownListEl = createElem('select');
 	let attributesForOption;
@@ -57,7 +63,6 @@ function createDropdownListElem(data, indexDefault) {
 	}
 
 	attributesForOption.forEach((item) => {
-		const valueDefault = (attributesForOption[indexDefault]['value']).toString();
 		const optionEl = createElem('option', content, item);
 
 		if (optionEl.value === valueDefault) {
@@ -67,8 +72,8 @@ function createDropdownListElem(data, indexDefault) {
 	})
 	return dropdownListEl;
 }
-
-const dropdownListEl = createDropdownListElem(arrayExample, 1);
+const valueDefault = 'value_2';
+const dropdownListEl = createDropdownListElem(arrayOfObjectsExample, valueDefault);
 
 
 
