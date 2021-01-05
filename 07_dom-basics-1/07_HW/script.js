@@ -26,6 +26,7 @@ function decrementCount() {
 }
 
 function startTimer () {
+    clearInterval(intervalTimer);
 	setTimerCount();
 	intervalTimer = setInterval(decrementCount, 1000);
 }
