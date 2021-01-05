@@ -12,6 +12,8 @@ let listItems = [
 	document.createElement('li'),
 ];
 
+
+// textContent is more safe than innerHTML cause it doesnt recognize HTML tags
 listItems[0].textContent = '1milk';
 listItems[1].textContent = '2bread';
 listItems[2].textContent = '3water';
