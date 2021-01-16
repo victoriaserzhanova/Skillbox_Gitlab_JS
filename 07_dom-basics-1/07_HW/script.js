@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-document.addEventListener('DOMContentLoaded', function() {
-	let timerInput = document.querySelector('.input');
-	let startTimerBtn = document.querySelector('.btn');
-	let timerCount = document.querySelector('.timer');
+document.addEventListener("DOMContentLoaded", function () {
+	let timerInput = document.querySelector(".input");
+	let startTimerBtn = document.querySelector(".btn");
+	let timerCount = document.querySelector(".timer");
 	let intervalTimer;
 
 	// Для JavaScript поля формы не имеют текстового содержимого, их значения хранятся именно в value.
-	function setTimerCount () {
+	function setTimerCount() {
 		let initialTimerCount = parseInt(timerInput.value);
-		if ((isNaN(initialTimerCount)) || (initialTimerCount <= 0) ) {
+		if (initialTimerCount <= 0) {
 			alert("Enter a positive number, please");
-		}
-		else {
+			return false;
+		} else {
 			timerCount.textContent = initialTimerCount;
 		}
 	}
@@ -21,19 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
 		let currentTimerCount = parseInt(timerCount.textContent);
 		currentTimerCount -= 1;
 		timerCount.textContent = currentTimerCount;
-		if (currentTimerCount == 0){
+		if (currentTimerCount == 0) {
 			clearInterval(intervalTimer);
 		}
 	}
 
-	function startTimer () {
-		clearInterval(intervalTimer);
-		setTimerCount();
-		intervalTimer = setInterval(decrementCount, 1000);
+	function startTimer() {
+		if (intervalTimer !== undefined) {
+			clearInterval(intervalTimer);
+		}
+		if (setTimerCount() !== false) {
+			intervalTimer = setInterval(decrementCount, 1000);
+		}
+		else {
+			return false;
+		}
 	}
 
-	startTimerBtn.addEventListener('click', startTimer);
+	startTimerBtn.addEventListener("click", startTimer);
 });
-
-
-
