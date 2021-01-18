@@ -7,21 +7,24 @@ let timeoutTimer;
 document.body.append(inputEl);
 document.body.append(titleEl);
 
-inputEl.placeholder = 'enter some text, please';
+document.addEventListener("DOMContentLoaded", function () {
+	inputEl.placeholder = 'enter some text, please';
+	inputEl.addEventListener('change', changeTitleText);
 
-function setInputValueToTitle() {
-	titleEl.textContent = inputEl.value;
-	inputEl.value = '';
-}
-
-function changeTitleText () {
-	if (timeoutTimer !== undefined) {
-		clearTimeout(timeoutTimer);
+	function setInputValueToTitle() {
+		titleEl.textContent = inputEl.value;
+		inputEl.value = '';
 	}
-	timeoutTimer = setTimeout(setInputValueToTitle,300);
-}
 
-inputEl.addEventListener('change', changeTitleText);
+	function changeTitleText () {
+		if (timeoutTimer !== undefined) {
+			clearTimeout(timeoutTimer);
+		}
+		timeoutTimer = setTimeout(setInputValueToTitle, 300);
+	}
+});
+
+
 
 
 
