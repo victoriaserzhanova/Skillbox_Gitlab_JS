@@ -1,8 +1,12 @@
 "use strict";
 
-const inputEl = document.createElement('input');
-const titleEl = document.createElement('h2');
-let timeoutTimer;
+function createNewElement(tagName) {
+	const newEl = document.createElement(tagName);
+	return newEl;
+}
+
+const inputEl = createNewElement('input');
+const titleEl = createNewElement('h2');
 
 document.body.append(inputEl);
 document.body.append(titleEl);
@@ -10,6 +14,7 @@ document.body.append(titleEl);
 document.addEventListener("DOMContentLoaded", function () {
 	inputEl.placeholder = 'enter some text, please';
 	inputEl.addEventListener('change', changeTitleText);
+	let timeoutTimer;
 
 	function setInputValueToTitle() {
 		titleEl.textContent = inputEl.value;
@@ -23,9 +28,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		timeoutTimer = setTimeout(setInputValueToTitle, 300);
 	}
 });
-
-
-
-
 
 
