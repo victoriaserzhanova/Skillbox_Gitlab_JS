@@ -31,9 +31,10 @@ list.start = 19;
 // removeAttribute
 list.removeAttribute('start');
 
-// classList
+// add class "list"
 list.classList.add('list');
 
 list.classList.toggle('class2'); //true
 
+// check presence of class "list3"
 list.classList.contains('list3'); //false
