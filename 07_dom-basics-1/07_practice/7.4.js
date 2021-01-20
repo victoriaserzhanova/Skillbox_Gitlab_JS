@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 });
 
+document.addEventListener('DOMContentLoaded', function (){
+	document.querySelectorAll('.text').forEach(function(element) {
+		element.addEventListener('click', function (event){
+			event.target.classList.toggle('text-color')
+		})
+	})
+})
+
 
 
 
