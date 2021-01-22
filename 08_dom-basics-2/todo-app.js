@@ -78,6 +78,20 @@
 		container.append(todoAppTitle);
 		container.append(todoItemForm.form);
 		container.append(todoList);
+    
+    // set disabled attribute for btn as default
+    todoItemForm.formBtn.setAttribute('disabled', '');
+    
+    // set attribute disabled for formBtn if formInput is empty
+    todoItemForm.formInput.addEventListener('input', function() {
+      if (todoItemForm.formInput.value) {
+        todoItemForm.formBtn.removeAttribute('disabled');
+      }
+      else {
+        todoItemForm.formBtn.setAttribute('disabled', '');
+      }
+    });
+
 
 		// browser creates event submit on form when user presses 'add task' btn or ENTER
 		todoItemForm.form.addEventListener('submit', function(event){
@@ -106,6 +120,8 @@
 
 			// clean input
 			todoItemForm.formInput.value = '';
+      
+      todoItemForm.formBtn.setAttribute('disabled', '');
 		});
 	}
 
