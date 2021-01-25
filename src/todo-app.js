@@ -19,7 +19,7 @@
 
     itemForm.formBtn.setAttribute("disabled", "");
 
-    // addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
+    addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
     // localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
 
     // set attribute disabled for formBtn if formInput is empty
@@ -168,9 +168,7 @@
     let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
     if (storageTodoList) {
       storageTodoList.forEach(function (element) {
-        let listItemFromLocalstorage = createItem(element);
-        todoListData.push(element);
-        console.log(listItemFromLocalstorage);
+        let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
         todoList.append(listItemFromLocalstorage.item);
       });
       console.log(localStorage);
