@@ -20,19 +20,10 @@
 
     itemForm.formBtn.setAttribute("disabled", "");
 
-    addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
-
-    // let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
-    // console.log(storageTodoList);
-    // if (storageTodoList) {
-    //   storageTodoList.forEach(function (element) {
-    //     let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
-    //     todoList.append(listItemFromLocalstorage.item);
-    //   });
-    //   console.log(localStorage);
-    //   localStorage.clear();
-    // }
-
+    if (localStorage) {
+      addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
+      localStorage.clear();
+    }
 
     // set attribute disabled for formBtn if formInput is empty
     itemForm.formInput.addEventListener("input", function () {
@@ -161,6 +152,14 @@
         localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
         console.log(localStorage);
         });
+
+    delBtn.addEventListener("click", function() {
+      item.remove();
+      object.name = '';
+
+      localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
+      });
+
     // app needs access to item and btns
     return {
       item,
@@ -169,20 +168,6 @@
     };
   }
 
-  // function addTodoListFromLocalstorage(
-  //   todoList,
-  //   currentStorageKey
-  // ) {
-  //   let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
-  //   if (storageTodoList) {
-  //     storageTodoList.forEach(function (element) {
-  //       todoListData= [];
-  //       let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
-  //       todoList.append(listItemFromLocalstorage.item);
-  //     });
-  //   }
-  // }
-
   function addTodoListFromLocalstorage(todoList,currentStorageKey, todoListData) {
     let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
     if (storageTodoList) {
@@ -190,18 +175,8 @@
         let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
         todoList.append(listItemFromLocalstorage.item);
       });
-      localStorage.clear();
     }
-
   }
 
-  function deleteBtnClickHandler(event) {
-    console.log("dlt btn asd");
-    let index = itemArray.indexOf(itemObject);
-    console.log(index);
-
-    listItem.item.remove();
-    console.log(itemArray);
-  }
   window.createTodoApp = createTodoApp;
 })();
