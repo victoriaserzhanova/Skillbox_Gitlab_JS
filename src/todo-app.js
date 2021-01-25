@@ -22,7 +22,6 @@
 
     if (localStorage) {
       addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
-      localStorage.clear();
     }
 
     // set attribute disabled for formBtn if formInput is empty
