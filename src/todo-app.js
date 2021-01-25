@@ -12,6 +12,7 @@
     let itemForm = createItemForm();
     let todoList = createTodoList();
     let todoListData = [];
+    console.log(todoListData);
 
     container.append(todoAppTitle);
     container.append(itemForm.form);
@@ -20,6 +21,17 @@
     itemForm.formBtn.setAttribute("disabled", "");
 
     addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
+
+    // let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
+    // console.log(storageTodoList);
+    // if (storageTodoList) {
+    //   storageTodoList.forEach(function (element) {
+    //     let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
+    //     todoList.append(listItemFromLocalstorage.item);
+    //   });
+    //   console.log(localStorage);
+    //   localStorage.clear();
+    // }
 
 
     // set attribute disabled for formBtn if formInput is empty
@@ -47,19 +59,8 @@
         name: itemForm.formInput.value,
         done: false,
       };
-      let listItem = createItem(itemData, todoListData,currentStorageKey);
+      let listItem = createItem(itemData, todoListData, currentStorageKey);
       todoList.append(listItem.item);
-
-      listItem.doneBtn.addEventListener("click", function() {
-        listItem.classList.toggle("list-group-item-success");
-        if (listIitem.classList.contains("list-group-item-success")) {
-          itemData.done = true;
-        } else {
-          itemData.done = false;
-        }
-        todoListData.push(itemData);
-        localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
-      });
 
       // clean input
       itemForm.formInput.value = "";
@@ -67,8 +68,6 @@
       itemForm.formBtn.setAttribute("disabled", "");
       return listItem;
     });
-
-    // listItem.doneBtn.addEventListener("click", doneBtnClickHandler);
 
 
     // delBtn.addEventListener("click", deleteBtnClickHandler);
@@ -147,8 +146,21 @@
     }
 
     todoListData.push(object);
+    console.log(todoListData);
     localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
     console.log(localStorage);
+
+    doneBtn.addEventListener("click", function() {
+        item.classList.toggle("list-group-item-success");
+        if (item.classList.contains("list-group-item-success")) {
+            object.done = true;
+        } else {
+            object.done = false;
+        }
+        console.log(todoListData);
+        localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
+        console.log(localStorage);
+        });
     // app needs access to item and btns
     return {
       item,
@@ -157,33 +169,32 @@
     };
   }
 
-  function addTodoListFromLocalstorage(
-    todoList,
-    currentStorageKey,
-    todoListData
-  ) {
+  // function addTodoListFromLocalstorage(
+  //   todoList,
+  //   currentStorageKey
+  // ) {
+  //   let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
+  //   if (storageTodoList) {
+  //     storageTodoList.forEach(function (element) {
+  //       todoListData= [];
+  //       let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
+  //       todoList.append(listItemFromLocalstorage.item);
+  //     });
+  //   }
+  // }
+
+  function addTodoListFromLocalstorage(todoList,currentStorageKey, todoListData) {
     let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
     if (storageTodoList) {
       storageTodoList.forEach(function (element) {
         let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
         todoList.append(listItemFromLocalstorage.item);
       });
+      localStorage.clear();
     }
-  }
-  // function doneBtnClickHandler(event) {
-  //   let li = event.path[2];
 
-  //   console.log(li);
-  //   li.classList.toggle("list-group-item-success");
-  //   if (listItem.item.classList.contains("list-group-item-success")) {
-  //     itemData.done = true;
-  //   } else {
-  //     itemData.done = false;
-  //   }
-  //   console.log(itemData);
-  //   localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
-  //   console.log(localStorage);
-  // }
+  }
+
   function deleteBtnClickHandler(event) {
     console.log("dlt btn asd");
     let index = itemArray.indexOf(itemObject);
