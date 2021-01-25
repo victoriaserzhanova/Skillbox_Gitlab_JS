@@ -20,7 +20,7 @@
     itemForm.formBtn.setAttribute("disabled", "");
 
     addTodoListFromLocalstorage(todoList, currentStorageKey, todoListData);
-    // localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
+
 
     // set attribute disabled for formBtn if formInput is empty
     itemForm.formInput.addEventListener("input", function () {
@@ -53,15 +53,12 @@
       listItem.doneBtn.addEventListener("click", function() {
         listItem.classList.toggle("list-group-item-success");
         if (listIitem.classList.contains("list-group-item-success")) {
-          let storageTodoList = JSON.parse(localStorage.getItem(currentStorageKey));
-          storageTodoList[object.name]
-          object.done = true;
+          itemData.done = true;
         } else {
-          object.done = false;
+          itemData.done = false;
         }
-        console.log(object);
+        todoListData.push(itemData);
         localStorage.setItem(currentStorageKey, JSON.stringify(todoListData));
-        console.log(localStorage);
       });
 
       // clean input
@@ -171,7 +168,6 @@
         let listItemFromLocalstorage = createItem(element, todoListData,currentStorageKey);
         todoList.append(listItemFromLocalstorage.item);
       });
-      console.log(localStorage);
     }
   }
   // function doneBtnClickHandler(event) {
